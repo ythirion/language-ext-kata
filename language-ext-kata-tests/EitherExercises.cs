@@ -18,7 +18,6 @@ public class EitherExercises
 
         result.Should().Be(4);
         eitherResult.IsRight.Should().BeTrue();
-        eitherResult.IsDefault().Should().BeFalse();
         eitherResult.IsLeft.Should().BeFalse();
     }
 
@@ -62,21 +61,6 @@ public class EitherExercises
         int result = -1;
 
         result.Should().Be(0);
-    }
-
-    [Fact]
-    public void MapTheSuccess()
-    {
-        // Divide x by y
-        // log the failure message to the console
-        // Log your success to the console
-        // Get the result or 0 if exception
-        int x = 8;
-        int y = 4;
-
-        var result = -1;
-
-        result.Should().Be(2);
     }
 
     [Fact]
