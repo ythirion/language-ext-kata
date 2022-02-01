@@ -108,15 +108,6 @@ namespace language_ext.kata.tests
         }
 
         [Fact]
-        public void HowManyPersonHaveCats()
-        {
-            // use count
-            var count = 0;
-
-            count.Should().Be(2);
-        }
-
-        [Fact]
         public void TotalPetAge()
         {
             var totalAge = 0L;
@@ -140,7 +131,7 @@ namespace language_ext.kata.tests
 
             sortedAgeList.Should()
                 .HaveCount(4)
-                .Should()
+                .And
                 .BeEquivalentTo(Seq(1, 2, 3, 4));
         }
 
@@ -152,7 +143,7 @@ namespace language_ext.kata.tests
 
             sortedAgeList.Should()
                 .HaveCount(4)
-                .Should()
+                .And
                 .BeEquivalentTo(Seq(4, 3, 2, 1));
         }
 
@@ -164,7 +155,7 @@ namespace language_ext.kata.tests
 
             top3OlderPets.Should()
                 .HaveCount(3)
-                .Should()
+                .And
                 .BeEquivalentTo(Seq("Spike", "Dolly", "Tabby"));
         }
 
