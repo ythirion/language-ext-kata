@@ -15,7 +15,7 @@ namespace language_ext.kata.tests
         {
             // Divide x = 9 by y = 2
             Try<int> tryResult = Divide(9, 2);
-            int result = 0;
+            int result = tryResult.Match(x => x, 0);
 
             result.Should().Be(4);
             tryResult.IsSucc().Should().BeTrue();
