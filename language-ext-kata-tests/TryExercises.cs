@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using LanguageExt;
 using Xunit;
@@ -9,6 +10,9 @@ namespace language_ext.kata.tests
     public class TryExercises : PetDomainKata
     {
         private const string SuccessMessage = "I m a fucking genius the result is ";
+
+        private static Try<int> Divide(int x, int y)
+            => Try(() => x / y);
 
         [Fact]
         public void GetTheResultOfDivide()
@@ -96,7 +100,22 @@ namespace language_ext.kata.tests
             result.Should().Be(1);
         }
 
-        private static Try<int> Divide(int x, int y)
-            => Try(() => x / y);
+        [Fact]
+        public void TryAndReturnOption()
+        {
+            // Create a Divide function that return an Option on Divide
+            // If something fails -> return None
+            // Can be useful sometimes
+            var result = 0;
+            result.Should().Be(3);
+        }
+
+        [Fact]
+        public async Task TryOnAsync()
+        {
+            // Create a Divide function that return a TryAsync
+            var result = 1;
+            result.Should().Be(0);
+        }
     }
 }
