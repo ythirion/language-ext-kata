@@ -10,11 +10,7 @@ namespace language_ext.kata.tests
     public class TryExercises : PetDomainKata
     {
         private readonly ITestOutputHelper _testOutputHelper;
-
-        public TryExercises(ITestOutputHelper testOutputHelper)
-        {
-            _testOutputHelper = testOutputHelper;
-        }
+        public TryExercises(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         private const string SuccessMessage = "I m a fucking genius the result is ";
 

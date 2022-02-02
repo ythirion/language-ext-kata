@@ -10,11 +10,7 @@ namespace language_ext.kata.tests;
 public class EitherExercises
 {
     private readonly ITestOutputHelper _testOutputHelper;
-
-    public EitherExercises(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-    }
+    public EitherExercises(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
     [Fact]
     public void GetTheResultOfDivide()
