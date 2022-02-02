@@ -1,14 +1,21 @@
-using System;
 using FluentAssertions;
 using LanguageExt;
 using LanguageExt.Common;
 using Xunit;
+using Xunit.Abstractions;
 using static LanguageExt.Prelude;
 
 namespace language_ext.kata.tests;
 
 public class EitherExercises
 {
+    private readonly ITestOutputHelper _testOutputHelper;
+
+    public EitherExercises(ITestOutputHelper testOutputHelper)
+    {
+        _testOutputHelper = testOutputHelper;
+    }
+
     [Fact]
     public void GetTheResultOfDivide()
     {
@@ -62,7 +69,7 @@ public class EitherExercises
         var result = Divide(x, 0)
             .IfLeft(left =>
             {
-                Console.WriteLine(left.Message);
+                _testOutputHelper.WriteLine(left.Message);
                 return 0;
             });
 
@@ -83,10 +90,10 @@ public class EitherExercises
         var result = Divide(x, y)
             .Bind(previous => Divide(previous, y))
             .Bind(previous => Divide(previous, y))
-            .Do(success => Console.WriteLine(success))
+            .Do(success => _testOutputHelper.WriteLine($"Result is {success}"))
             .IfLeft(left =>
             {
-                Console.WriteLine(left.Message);
+                _testOutputHelper.WriteLine(left.Message);
                 return 0;
             });
 
