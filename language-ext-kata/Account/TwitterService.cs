@@ -1,9 +1,11 @@
-﻿namespace language_ext.kata.Account
+﻿using System.Threading.Tasks;
+
+namespace language_ext.kata.Account
 {
     public class TwitterService
     {
-        public string Register(string email, string name) => "TwitterAccountId";
-        public string Authenticate(string email, string password) => "ATwitterToken";
-        public string Tweet(string token, string message) => "TweetUrl";
+        public async Task<string> Register(string email, string name) => await Task.FromResult("TwitterAccountId");
+        public async Task<string> Authenticate(string email, string password) => await Task.FromResult("ATwitterToken");
+        public async Task<string> Tweet(string token, string message) => await Task.FromResult("TweetUrl");
     }
 }

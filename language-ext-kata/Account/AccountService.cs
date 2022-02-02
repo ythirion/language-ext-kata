@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
@@ -20,32 +21,32 @@ namespace language_ext.kata.Account
             _businessLogger = businessLogger;
         }
 
-        private Try<RegistrationContext> RetrieveUserDetails(Guid userId) =>
-            Try(() => _userService.FindById(userId))
+        private TryAsync<RegistrationContext> CreateContext(Guid userId)
+            => TryAsync(() => _userService.FindById(userId))
                 .Map(user => user.ToContext());
 
-        private Try<RegistrationContext> RegisterOnTwitter(RegistrationContext context) =>
-            Try(() => _twitterService.Register(context.Email, context.Name))
+        private TryAsync<RegistrationContext> RegisterOnTwitter(RegistrationContext context)
+            => TryAsync(() => _twitterService.Register(context.Email, context.Name))
                 .Map(twitterAccountId => context with {AccountId = twitterAccountId});
 
-        private Try<RegistrationContext> AuthenticateOnTwitter(RegistrationContext context) =>
-            Try(() => _twitterService.Authenticate(context.Email, context.Password))
+        private TryAsync<RegistrationContext> AuthenticateOnTwitter(RegistrationContext context)
+            => TryAsync(() => _twitterService.Authenticate(context.Email, context.Password))
                 .Map(token => context with {Token = token});
 
-        private Try<RegistrationContext> Tweet(RegistrationContext context) =>
-            Try(() => _twitterService.Tweet(context.Token, "Hello I am " + context.Name))
+        private TryAsync<RegistrationContext> Tweet(RegistrationContext context)
+            => TryAsync(() => _twitterService.Tweet(context.Token, "Hello I am " + context.Name))
                 .Map(tweetUrl => context with {Url = tweetUrl});
 
-        private Try<RegistrationContext> UpdateUser(RegistrationContext context) =>
-            Try(() =>
+        private TryAsync<RegistrationContext> UpdateUser(RegistrationContext context) =>
+            (async () =>
             {
-                _userService.UpdateTwitterAccountId(context.Id, context.AccountId);
+                await _userService.UpdateTwitterAccountId(context.Id, context.AccountId);
                 return context;
             });
 
-        public Option<string> Register(Guid id)
+        public async Task<Option<string>> Register(Guid id)
         {
-            return RetrieveUserDetails(id)
+            return await CreateContext(id)
                 .Bind(RegisterOnTwitter)
                 .Bind(AuthenticateOnTwitter)
                 .Bind(Tweet)
@@ -55,7 +56,7 @@ namespace language_ext.kata.Account
                 .IfFail(failure =>
                 {
                     _businessLogger.LogFailureRegister(id, failure);
-                    return null;
+                    return (string) null;
                 });
         }
     }

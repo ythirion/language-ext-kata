@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using language_ext.kata.Account;
 using Xunit;
@@ -18,17 +19,17 @@ namespace language_ext.kata.tests
                 new BusinessLogger());
 
         [Fact]
-        public void Register_BudSpencer_should_return_a_new_tweet_url()
+        public async Task Register_BudSpencer_should_return_a_new_tweet_url()
         {
-            var tweetUrl = _accountService.Register(BudSpencer);
-            tweetUrl.GetUnsafe().Should().Be("TweetUrl");
+            var tweetUrl = await _accountService.Register(BudSpencer).IfNoneAsync("Registration failed");
+            Assert.Equal("TweetUrl", tweetUrl);
         }
 
         [Fact]
-        public void Register_an_unknown_user_should_return_an_error_message()
+        public async Task Register_an_unknown_user_should_return_an_error_message()
         {
-            var tweetUrl = _accountService.Register(UnknownUser);
-            tweetUrl.IsNone.Should().BeTrue();
+            var tweetUrl = await _accountService.Register(UnknownUser).IfNoneAsync("Registration failed");
+            Assert.Equal("Registration failed", tweetUrl);
         }
     }
 }
