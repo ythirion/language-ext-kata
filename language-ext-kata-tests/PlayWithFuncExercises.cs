@@ -42,7 +42,7 @@ public class PlayWithFuncExercises
     [Fact]
     public void Formula1()
     {
-        // Use the funtions defined in this class to implement this formula
+        // Use the functions defined in this class to implement this formula
         // (2x + y) * (z / 3w)
         int Formula(int x, int y, int z, int w) => 0;
         Formula(5, 4, 23, 2).Should().Be(42);
@@ -52,7 +52,7 @@ public class PlayWithFuncExercises
     public void FormulaE()
     {
         // Make the call to the previous formula Safe
-        // Byt encapsulate the call in a Try monad
+        // By encapsulating the call in a Try monad
         Try<int> SafeFormula(int x, int y, int z, int w) => () => 0;
         SafeFormula(5, 4, 23, 0).IsFail().Should().BeTrue();
     }
