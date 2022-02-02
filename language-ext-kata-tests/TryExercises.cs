@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using LanguageExt;
 using Xunit;
@@ -13,6 +14,9 @@ namespace language_ext.kata.tests
         public TryExercises(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
         private const string SuccessMessage = "I m a fucking genius the result is ";
+
+        private static Try<int> Divide(int x, int y)
+            => Try(() => x / y);
 
         [Fact]
         public void GetTheResultOfDivide()
@@ -146,8 +150,29 @@ namespace language_ext.kata.tests
 
             result.Should().Be(1);
         }
+        
+        [Fact]
+        public void TryAndReturnOption()
+        {
+            // Create a Divide function that return an Option on Divide
+            // If something fails -> return None
+            // Can be useful sometimes
+            var result = DivideOptional(9, 3).IfNoneOrFail(0);
+            result.Should().Be(3);
+        }
 
-        private static Try<int> Divide(int x, int y)
-            => Try(() => x / y);
+        private static TryOption<int> DivideOptional(int x, int y)
+            => (() => x / y);
+
+        [Fact]
+        public async Task TryOnAsync()
+        {
+            // Create a Divide function that return a TryAsync
+            var result = await DivideAsync(9, 0).IfFail(0);
+            result.Should().Be(0);
+        }
+
+        private static TryAsync<int> DivideAsync(int x, int y)
+            => TryAsync(() => Task.FromResult(x / y));
     }
 }
