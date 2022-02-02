@@ -21,16 +21,14 @@ namespace language_ext.kata.tests
         public void Register_BudSpencer_should_return_a_new_tweet_url()
         {
             var tweetUrl = _accountService.Register(BudSpencer);
-
-            tweetUrl.Should().Be("TweetUrl", tweetUrl);
+            tweetUrl.GetUnsafe().Should().Be("TweetUrl");
         }
 
         [Fact]
         public void Register_an_unknown_user_should_return_an_error_message()
         {
             var tweetUrl = _accountService.Register(UnknownUser);
-
-            tweetUrl.Should().BeNull();
+            tweetUrl.IsNone.Should().BeTrue();
         }
     }
 }
