@@ -25,8 +25,8 @@ public class EitherExercises
     public void MapTheResultOfDivide()
     {
         // Divide x = 9 by y = 2 and add z to the result
-        int z = 3;
-        int result = Divide(9, 2)
+        var z = 3;
+        var result = Divide(9, 2)
             .Map(a => a + z)
             .IfLeft(0);
 
@@ -37,7 +37,7 @@ public class EitherExercises
     public void DivideByZeroIsAlwaysAGoodIdea()
     {
         // Divide x by 0 and get the result
-        Func<Either<Error, int>> call = () => Divide(1, 0);
+        var call = () => Divide(1, 0);
         var result = call.Invoke();
 
         result.IsLeft.Should().BeTrue();
@@ -48,8 +48,8 @@ public class EitherExercises
     public void DivideByZeroOrElse()
     {
         // Divide x by 0, on exception returns 0
-        int x = 1;
-        int result = Divide(x, 0).IfLeft(0);
+        var x = 1;
+        var result = Divide(x, 0).IfLeft(0);
 
         result.Should().Be(0);
     }
@@ -58,9 +58,8 @@ public class EitherExercises
     public void MapTheFailure()
     {
         // Divide x by 0, log the failure message to the console and get 0
-        int x = 1;
-
-        int result = Divide(x, 0)
+        var x = 1;
+        var result = Divide(x, 0)
             .IfLeft(left =>
             {
                 Console.WriteLine(left.Message);
@@ -78,10 +77,10 @@ public class EitherExercises
         // log the failure message to the console
         // Log your success to the console
         // Get the result or 0 if exception
-        int x = 27;
-        int y = 3;
+        var x = 27;
+        var y = 3;
 
-        int result = Divide(x, y)
+        var result = Divide(x, y)
             .Bind(previous => Divide(previous, y))
             .Bind(previous => Divide(previous, y))
             .Do(success => Console.WriteLine(success))
