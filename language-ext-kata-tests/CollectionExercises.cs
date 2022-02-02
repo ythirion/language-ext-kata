@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using FluentAssertions;
 using language_ext.kata.Persons;
 using LanguageExt;
@@ -123,7 +122,7 @@ namespace language_ext.kata.tests
         [Fact]
         public void PetsNameSorted()
         {
-            string sortedPetNames =
+            var sortedPetNames =
                 people.Bind(p => p.Pets)
                     .Map(pet => pet.Name)
                     .OrderBy(s => s)
@@ -138,7 +137,7 @@ namespace language_ext.kata.tests
         public void SortByAge()
         {
             // Create a Seq<int> with ascending ordered age values.
-            Seq<int> sortedAgeList = people.Bind(p => p.Pets)
+            var sortedAgeList = people.Bind(p => p.Pets)
                 .Map(pet => pet.Age)
                 .Distinct()
                 .OrderBy(a => a)
@@ -171,7 +170,7 @@ namespace language_ext.kata.tests
         public void Top3OlderPets()
         {
             // Create a Seq<string> with the 3 older pets.
-            Seq<string> top3OlderPets =
+            var top3OlderPets =
                 people.Bind(p => p.Pets)
                     .OrderByDescending(pet => pet.Age)
                     .Map(pet => pet.Name).ToSeq()
@@ -223,7 +222,7 @@ namespace language_ext.kata.tests
         public void GetListOfPossibleParksForAWalkPerPerson()
         {
             // For each person described as "firstName lastName" returns the list of names possible parks to go for a walk
-            Dictionary<string, Seq<string>> possibleParksForAWalkPerPerson =
+            var possibleParksForAWalkPerPerson =
                 people.ToDictionary(
                     p => $"{p.FirstName} {p.LastName}",
                     p => FilterParksFor(p.Pets.Map(pet => pet.Type)));
