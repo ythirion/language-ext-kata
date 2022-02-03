@@ -17,8 +17,8 @@ Do the exercises in this order :
 * .NET Core 6
 * Your favorite IDE (Rider ;-)
 
-## More explanation around the paradigms demonstrated here
-We have created and used this kata in the Software Craftsmanship Luxembourg community : [please find the slides here](https://speakerdeck.com/thirion/functional-programming-made-easy-in-java-and-c-number)
+## Facilitation guide
+Slides to facilitate this kata are available [here](files/fp-made-easy-in-C#.pdf)
 
 ## Solution
 * A branch `solutions available to compare with your own solution
