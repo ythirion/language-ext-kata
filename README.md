@@ -18,10 +18,9 @@ Do the exercises in this order :
 * Your favorite IDE (Rider ;-)
 
 ## Facilitation guide
-Slides to facilitate this kata are available [here](files/fp-made-easy-in-C#.pdf)
+Slides to facilitate this kata are available [here](https://github.com/ythirion/language-ext-kata/blob/main/files/fp-made-easy-in-C%23.pdf)
 
 ## Solution
 * A branch `solutions available to compare with your own solution
 	* There is an Async solution branch available as well for Real Life Example handled in an async way 
-
 	* A step by step guide for the Real Life Example is available in the `solution` branch as well
