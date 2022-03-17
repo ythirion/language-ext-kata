@@ -11,6 +11,6 @@
     <Folder Include="Account\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LanguageExt.Core" Version="3.4.13" />
+    <PackageReference Include="LanguageExt.Core" Version="4.0.4" />
   </ItemGroup>
 </Project>
